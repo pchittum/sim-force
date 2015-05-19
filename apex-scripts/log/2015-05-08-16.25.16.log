@@ -1,0 +1,49 @@
+Execute Anonymous
+
+================================
+
+System.debug(System.today() -1);
+
+List<Account> accts = [select name,id from Account where  CreatedDate > : System.today() ];
+
+System.debug(accts);
+
+delete accts;
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: System.debug(System.today() -1);
+Execute Anonymous: 
+Execute Anonymous: List<Account> accts = [select name,id from Account where  CreatedDate > : System.today() ];
+Execute Anonymous: 
+Execute Anonymous: System.debug(accts);
+Execute Anonymous: 
+Execute Anonymous: delete accts;
+16:25:15.017 (17117216)|EXECUTION_STARTED
+16:25:15.017 (17128623)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+16:25:15.017 (17758232)|USER_DEBUG|[1]|DEBUG|2015-05-07 00:00:00
+16:25:15.017 (17995422)|SOQL_EXECUTE_BEGIN|[3]|Aggregations:0|SELECT name, id FROM Account WHERE CreatedDate > :tmpVar1
+16:25:15.021 (21531333)|SOQL_EXECUTE_END|[3]|Rows:10
+16:25:15.021 (21716609)|USER_DEBUG|[5]|DEBUG|(Account:{Name=Sputter340, Id=00124000008Dk7EAAS}, Account:{Name=Northwind, Id=00124000008Dk7FAAS}, Account:{Name=First Amalgamated, Id=00124000008Dk7GAAS}, Account:{Name=Crocker Bank, Id=00124000008Dk7HAAS}, Account:{Name=BCP Chem, Id=00124000008Dk7IAAS}, Account:{Name=FSAB, Id=00124000008Dk7JAAS}, Account:{Name=Daxell Corp, Id=00124000008Dk7KAAS}, Account:{Name=Laemle Turnkey Solutions, Id=00124000008Dk7LAAS}, Account:{Name=Pack Flat, Id=00124000008Dk7MAAS}, Account:{Name=Corwin Tully, LLC., Id=00124000008Dk7NAAS})
+16:25:15.021 (21767711)|DML_BEGIN|[7]|Op:Delete|Type:Account|Rows:10
+16:25:15.176 (176667887)|DML_END|[7]
+16:25:15.762 (185745212)|CUMULATIVE_LIMIT_USAGE
+16:25:15.762|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 1 out of 100
+  Number of query rows: 10 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 1 out of 150
+  Number of DML rows: 10 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+16:25:15.762|CUMULATIVE_LIMIT_USAGE_END
+
+16:25:15.185 (185791858)|CODE_UNIT_FINISHED|execute_anonymous_apex
+16:25:15.187 (187064352)|EXECUTION_FINISHED

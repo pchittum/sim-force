@@ -1,0 +1,141 @@
+Execute Anonymous
+
+================================
+
+
+List<String> stageNames = new List<String>{'Closed Won','Closed Lost','Value Proposition','Negotiation/Review','Proposal/Price Quote','Needs Analysis'};
+for (Integer i = 0 ; i < 100; i++){
+    Integer numUnits = Integer.valueof(Math.floor(Math.random() * 100));
+ System.debug(stageNames.get(Math.mod(numUnits,stageNames.size())));
+}
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: 
+Execute Anonymous: List<String> stageNames = new List<String>{'Closed Won','Closed Lost','Value Proposition','Negotiation/Review','Proposal/Price Quote','Needs Analysis'};
+Execute Anonymous: for (Integer i = 0 ; i < 100; i++){
+Execute Anonymous:     Integer numUnits = Integer.valueof(Math.floor(Math.random() * 100));
+Execute Anonymous:  System.debug(stageNames.get(Math.mod(numUnits,stageNames.size())));
+Execute Anonymous: }
+17:59:42.021 (21241634)|EXECUTION_STARTED
+17:59:42.021 (21251271)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+17:59:42.022 (22245080)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.022 (22389744)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.022 (22527411)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.022 (22658053)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.022 (22787585)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.022 (22915555)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.023 (23043840)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.023 (23173521)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.023 (23301018)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.023 (23428511)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.023 (23562618)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.023 (23690649)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.023 (23818447)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.023 (23944846)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.024 (24072069)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.024 (24200461)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.024 (24328253)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.024 (24458137)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.024 (24587324)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.024 (24714801)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.024 (24841734)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.024 (24968368)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.025 (25095235)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.025 (25224400)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.025 (25351122)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.025 (25483263)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.025 (25611590)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.025 (25738540)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.025 (25864815)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.025 (25991204)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.026 (26117905)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.026 (26246306)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.026 (26373334)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.026 (26508394)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.026 (26636595)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.026 (26764395)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.026 (26890038)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.027 (27017110)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.027 (27145503)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.027 (27272621)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.027 (27400308)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.027 (27532632)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.027 (27660322)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.027 (27787593)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.027 (27914470)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.028 (28041102)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.028 (28168689)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.028 (28295357)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.028 (28421812)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.028 (28553810)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.028 (28681062)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.028 (28807974)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.028 (28934749)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.029 (29061142)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.029 (29188839)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.029 (29316090)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.029 (29443519)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.029 (29576099)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.029 (29702872)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.029 (29828904)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.029 (29955821)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.030 (30082043)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.030 (30209790)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.030 (30336597)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.030 (30467441)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.030 (30595639)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.030 (30721884)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.030 (30848543)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.030 (30974916)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.031 (31101354)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.031 (31228992)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.031 (31355794)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.031 (31486709)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.031 (31615002)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.031 (31741713)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.031 (31869633)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.031 (31996310)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.032 (32123486)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.032 (32251579)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.032 (32379066)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.032 (32510847)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.032 (32638440)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.032 (32765684)|USER_DEBUG|[5]|DEBUG|Proposal/Price Quote
+17:59:42.032 (32891979)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.033 (33019261)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.033 (33146928)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.033 (33273381)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.033 (33399737)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.033 (33530773)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.033 (33658215)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.033 (33785307)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.033 (33912126)|USER_DEBUG|[5]|DEBUG|Closed Lost
+17:59:42.034 (34039124)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.034 (34167611)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.034 (34294278)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.034 (34420717)|USER_DEBUG|[5]|DEBUG|Closed Won
+17:59:42.034 (34552786)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.034 (34680015)|USER_DEBUG|[5]|DEBUG|Negotiation/Review
+17:59:42.034 (34806926)|USER_DEBUG|[5]|DEBUG|Needs Analysis
+17:59:42.034 (34933406)|USER_DEBUG|[5]|DEBUG|Value Proposition
+17:59:42.992 (34969928)|CUMULATIVE_LIMIT_USAGE
+17:59:42.992|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 0 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+17:59:42.992|CUMULATIVE_LIMIT_USAGE_END
+
+17:59:42.035 (35014228)|CODE_UNIT_FINISHED|execute_anonymous_apex
+17:59:42.036 (36221857)|EXECUTION_FINISHED

@@ -1,0 +1,50 @@
+Execute Anonymous
+
+================================
+
+List<Opportunity> opptys = [select id, name from Opportunity where CreatedDate > : System.today()];
+List<Account> accts = [select id, name from Account where CreatedDate > : System.today()];
+System.debug(accts);
+System.debug(opptys);
+
+delete opptys;
+delete accts;
+
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: List<Opportunity> opptys = [select id, name from Opportunity where CreatedDate > : System.today()];
+Execute Anonymous: List<Account> accts = [select id, name from Account where CreatedDate > : System.today()];
+Execute Anonymous: System.debug(accts);
+Execute Anonymous: System.debug(opptys);
+Execute Anonymous: 
+Execute Anonymous: delete opptys;
+Execute Anonymous: delete accts;
+22:33:25.025 (25877525)|EXECUTION_STARTED
+22:33:25.025 (25886415)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+22:33:25.026 (26580966)|SOQL_EXECUTE_BEGIN|[1]|Aggregations:0|SELECT id, name FROM Opportunity WHERE CreatedDate > :tmpVar1
+22:33:25.030 (30299781)|SOQL_EXECUTE_END|[1]|Rows:0
+22:33:25.030 (30508580)|SOQL_EXECUTE_BEGIN|[2]|Aggregations:0|SELECT id, name FROM Account WHERE CreatedDate > :tmpVar1
+22:33:25.033 (33698031)|SOQL_EXECUTE_END|[2]|Rows:0
+22:33:25.033 (33765316)|USER_DEBUG|[3]|DEBUG|()
+22:33:25.033 (33788793)|USER_DEBUG|[4]|DEBUG|()
+22:33:25.268 (33900855)|CUMULATIVE_LIMIT_USAGE
+22:33:25.268|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 2 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+22:33:25.268|CUMULATIVE_LIMIT_USAGE_END
+
+22:33:25.033 (33924741)|CODE_UNIT_FINISHED|execute_anonymous_apex
+22:33:25.035 (35068779)|EXECUTION_FINISHED

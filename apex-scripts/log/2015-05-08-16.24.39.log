@@ -1,0 +1,49 @@
+Execute Anonymous
+
+================================
+
+System.debug(System.today() -1);
+
+List<Account> accts = [select name,id from Account where  CreatedDate > : System.today() ];
+
+System.debug(accts);
+
+delete accts;
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: System.debug(System.today() -1);
+Execute Anonymous: 
+Execute Anonymous: List<Account> accts = [select name,id from Account where  CreatedDate > : System.today() ];
+Execute Anonymous: 
+Execute Anonymous: System.debug(accts);
+Execute Anonymous: 
+Execute Anonymous: delete accts;
+16:24:38.026 (26626277)|EXECUTION_STARTED
+16:24:38.026 (26641020)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+16:24:38.027 (27340767)|USER_DEBUG|[1]|DEBUG|2015-05-07 00:00:00
+16:24:38.027 (27561297)|SOQL_EXECUTE_BEGIN|[3]|Aggregations:0|SELECT name, id FROM Account WHERE CreatedDate > :tmpVar1
+16:24:38.031 (31752471)|SOQL_EXECUTE_END|[3]|Rows:1
+16:24:38.031 (31859907)|USER_DEBUG|[5]|DEBUG|(Account:{Name=test, Id=00124000008Dk6FAAS})
+16:24:38.031 (31905519)|DML_BEGIN|[7]|Op:Delete|Type:Account|Rows:1
+16:24:38.604 (604307125)|DML_END|[7]
+16:24:38.720 (612167423)|CUMULATIVE_LIMIT_USAGE
+16:24:38.720|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 1 out of 100
+  Number of query rows: 1 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 1 out of 150
+  Number of DML rows: 1 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+16:24:38.720|CUMULATIVE_LIMIT_USAGE_END
+
+16:24:38.612 (612220518)|CODE_UNIT_FINISHED|execute_anonymous_apex
+16:24:38.613 (613690087)|EXECUTION_FINISHED

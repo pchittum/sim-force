@@ -1,0 +1,54 @@
+Execute Anonymous
+
+================================
+
+List<Opportunity> opptys = [select id, name from Opportunity where CreatedDate > : System.today()];
+List<Account> accts = [select id, name from Account where CreatedDate > : System.today()];
+System.debug(accts);
+System.debug(opptys);
+
+delete opptys;
+delete accts;
+
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: List<Opportunity> opptys = [select id, name from Opportunity where CreatedDate > : System.today()];
+Execute Anonymous: List<Account> accts = [select id, name from Account where CreatedDate > : System.today()];
+Execute Anonymous: System.debug(accts);
+Execute Anonymous: System.debug(opptys);
+Execute Anonymous: 
+Execute Anonymous: delete opptys;
+Execute Anonymous: delete accts;
+22:22:37.021 (21163551)|EXECUTION_STARTED
+22:22:37.021 (21173346)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+22:22:37.021 (21982013)|SOQL_EXECUTE_BEGIN|[1]|Aggregations:0|SELECT id, name FROM Opportunity WHERE CreatedDate > :tmpVar1
+22:22:37.026 (26903652)|SOQL_EXECUTE_END|[1]|Rows:102
+22:22:37.027 (27229167)|SOQL_EXECUTE_BEGIN|[2]|Aggregations:0|SELECT id, name FROM Account WHERE CreatedDate > :tmpVar1
+22:22:37.030 (30544807)|SOQL_EXECUTE_END|[2]|Rows:10
+22:22:37.030 (30715936)|USER_DEBUG|[3]|DEBUG|(Account:{Name=Daxell Corp, Id=00124000008EwMFAA0}, Account:{Name=Laemle Turnkey Solutions, Id=00124000008EwMGAA0}, Account:{Name=Pack Flat, Id=00124000008EwMHAA0}, Account:{Name=Corwin Tully, LLC., Id=00124000008EwMIAA0}, Account:{Name=Northwind, Id=00124000008EwMAAA0}, Account:{Name=First Amalgamated, Id=00124000008EwMBAA0}, Account:{Name=Crocker Bank, Id=00124000008EwMCAA0}, Account:{Name=Sputter340, Id=00124000008EwM9AAK}, Account:{Name=BCP Chem, Id=00124000008EwMDAA0}, Account:{Name=FSAB, Id=00124000008EwMEAA0})
+22:22:37.030 (30829779)|USER_DEBUG|[4]|DEBUG|(Opportunity:{Name=Sputter340 1000 Units, Id=006240000047xjOAAQ}, Opportunity:{Name=Sputter340 1000 Units, Id=006240000047xjPAAQ}, Opportunity:{Name=Sputter340 1000 Units, Id=006240000047xjQAAQ}, Opportunity:{Name=Sputter340 1000 Units, Id=006240000047xjRAAQ}, Opportunity:{Name=Sputter340 1000 Units, Id=006240000047xjNAAQ}, Opportunity:{Name=Northwind 1000 Units, Id=006240000047xiwAAA}, Opportunity:{Name=Northwind 1000 Units, Id=006240000047xixAAA}, Opportunity:{Name=Northwind 1000 Units, Id=006240000047xiyAAA}, Opportunity:{Name=BCP Chem 6 Units, Id=006240000047xizAAA}, Opportunity:{Name=Northwind 1000 Units, Id=006240000047xj0AAA}, ...)
+22:22:37.030 (30877696)|DML_BEGIN|[6]|Op:Delete|Type:Opportunity|Rows:102
+22:22:38.036 (1036932845)|DML_END|[6]
+22:22:38.037 (1037187354)|DML_BEGIN|[7]|Op:Delete|Type:Account|Rows:10
+22:22:38.428 (1428789085)|DML_END|[7]
+22:22:38.642 (1460525655)|CUMULATIVE_LIMIT_USAGE
+22:22:38.642|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 2 out of 100
+  Number of query rows: 112 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 2 out of 150
+  Number of DML rows: 112 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+22:22:38.642|CUMULATIVE_LIMIT_USAGE_END
+
+22:22:38.460 (1460579265)|CODE_UNIT_FINISHED|execute_anonymous_apex
+22:22:38.462 (1462010545)|EXECUTION_FINISHED

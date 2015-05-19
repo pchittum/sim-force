@@ -1,0 +1,38 @@
+Execute Anonymous
+
+================================
+
+List<Account> accts = [select name,id from Account];
+
+System.debug(accts);
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: List<Account> accts = [select name,id from Account];
+Execute Anonymous: 
+Execute Anonymous: System.debug(accts);
+16:20:51.031 (31198660)|EXECUTION_STARTED
+16:20:51.031 (31208424)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+16:20:51.031 (31883440)|SOQL_EXECUTE_BEGIN|[1]|Aggregations:0|SELECT name, id FROM Account
+16:20:51.050 (50076964)|SOQL_EXECUTE_END|[1]|Rows:12
+16:20:51.050 (50292228)|USER_DEBUG|[3]|DEBUG|(Account:{Name=GenePoint, Id=00124000007JoyHAAS}, Account:{Name=United Oil & Gas, UK, Id=00124000007JoyIAAS}, Account:{Name=United Oil & Gas, Singapore, Id=00124000007JoyJAAS}, Account:{Name=Edge Communications, Id=00124000007JoyKAAS}, Account:{Name=Burlington Textiles Corp of America, Id=00124000007JoyLAAS}, Account:{Name=Pyramid Construction Inc., Id=00124000007JoyMAAS}, Account:{Name=Dickenson plc, Id=00124000007JoyNAAS}, Account:{Name=Grand Hotels & Resorts Ltd, Id=00124000007JoyOAAS}, Account:{Name=Express Logistics and Transport, Id=00124000007JoyPAAS}, Account:{Name=University of Arizona, Id=00124000007JoyQAAS}, ...)
+16:20:51.887 (50340233)|CUMULATIVE_LIMIT_USAGE
+16:20:51.887|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 1 out of 100
+  Number of query rows: 12 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+16:20:51.887|CUMULATIVE_LIMIT_USAGE_END
+
+16:20:51.050 (50384455)|CODE_UNIT_FINISHED|execute_anonymous_apex
+16:20:51.051 (51566064)|EXECUTION_FINISHED

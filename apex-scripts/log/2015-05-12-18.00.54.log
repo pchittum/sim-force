@@ -1,0 +1,143 @@
+Execute Anonymous
+
+================================
+
+
+List<String> stageNames = new List<String>{'Closed Won','Closed Lost','Value Proposition','Negotiation/Review','Proposal/Price Quote','Needs Analysis'};
+for (Integer i = 0 ; i < 100; i++){
+    Integer numUnits = Integer.valueof(Math.floor(Math.random() * 100));
+    Integer stageIdx = Math.mod(numUnits,stageNames.size());
+ System.debug(stageNames.get(stageIdx));
+}
+
+================================
+
+33.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,INFO;DB,INFO;VALIDATION,INFO;WORKFLOW,INFO
+Execute Anonymous: 
+Execute Anonymous: List<String> stageNames = new List<String>{'Closed Won','Closed Lost','Value Proposition','Negotiation/Review','Proposal/Price Quote','Needs Analysis'};
+Execute Anonymous: for (Integer i = 0 ; i < 100; i++){
+Execute Anonymous:     Integer numUnits = Integer.valueof(Math.floor(Math.random() * 100));
+Execute Anonymous:     Integer stageIdx = Math.mod(numUnits,stageNames.size());
+Execute Anonymous:  System.debug(stageNames.get(stageIdx));
+Execute Anonymous: }
+18:00:54.025 (25160583)|EXECUTION_STARTED
+18:00:54.025 (25170706)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+18:00:54.028 (28894423)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.029 (29087603)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.029 (29241086)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.029 (29416527)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.029 (29569606)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.029 (29710244)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.029 (29847732)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.029 (29985333)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.030 (30137679)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.030 (30282400)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.030 (30420374)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.030 (30557718)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.030 (30694402)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.030 (30832295)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.030 (30996974)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.031 (31140363)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.031 (31280626)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.031 (31417389)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.031 (31555008)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.031 (31745830)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.031 (31976152)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.032 (32223904)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.032 (32457361)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.035 (35129313)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.035 (35370440)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.035 (35514500)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.035 (35654050)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.035 (35791963)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.035 (35928544)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.036 (36064854)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.036 (36209631)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.036 (36346875)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.036 (36483189)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.036 (36618626)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.036 (36755595)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.036 (36891021)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.037 (37026777)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.037 (37169558)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.037 (37305803)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.037 (37441547)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.037 (37576643)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.037 (37711592)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.037 (37847310)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.037 (37983053)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.038 (38127950)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.038 (38265982)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.038 (38401144)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.038 (38536611)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.038 (38671929)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.038 (38807555)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.041 (41285769)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.041 (41432380)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.041 (41567671)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.041 (41703344)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.041 (41837795)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.041 (41974662)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.042 (42115197)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.042 (42256881)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.042 (42394047)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.042 (42529262)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.042 (42663992)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.042 (42799184)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.042 (42934495)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.043 (43069522)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.043 (43212251)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.043 (43347450)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.043 (43482774)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.043 (43618115)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.043 (43753595)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.043 (43889347)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.044 (44024969)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.044 (44168067)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.044 (44304616)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.044 (44439249)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.044 (44574377)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.044 (44709217)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.047 (47170299)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.047 (47319030)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.047 (47455633)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.047 (47590854)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.047 (47726114)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.047 (47861010)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.047 (47997100)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.048 (48137253)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.048 (48274854)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.048 (48410709)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.048 (48547176)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.048 (48682991)|USER_DEBUG|[6]|DEBUG|Proposal/Price Quote
+18:00:54.048 (48818278)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.048 (48953947)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.049 (49094435)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.049 (49232962)|USER_DEBUG|[6]|DEBUG|Closed Won
+18:00:54.049 (49368798)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.049 (49504761)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.049 (49639962)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.049 (49775335)|USER_DEBUG|[6]|DEBUG|Closed Lost
+18:00:54.049 (49910648)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.050 (50046143)|USER_DEBUG|[6]|DEBUG|Value Proposition
+18:00:54.050 (50188502)|USER_DEBUG|[6]|DEBUG|Negotiation/Review
+18:00:54.050 (50324298)|USER_DEBUG|[6]|DEBUG|Needs Analysis
+18:00:54.679 (50386931)|CUMULATIVE_LIMIT_USAGE
+18:00:54.679|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 0 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+18:00:54.679|CUMULATIVE_LIMIT_USAGE_END
+
+18:00:54.050 (50414866)|CODE_UNIT_FINISHED|execute_anonymous_apex
+18:00:54.053 (53527958)|EXECUTION_FINISHED

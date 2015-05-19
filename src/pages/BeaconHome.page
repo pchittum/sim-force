@@ -1,0 +1,446 @@
+<apex:page docType="HTML-5.0" showHeader="false" sidebar="false" controller="BeaconHomeController">
+
+	<apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />
+	<apex:includeScript value="/canvas/sdk/js/29.0/publisher.js"/>
+	<script type="text/javascript">
+
+		var beacon = beacon || {};
+
+		window.resizeTo(550, window.innerHeight);
+
+		beacon.updates = {
+			lastAudioCheck : null,
+			lastOtherCheck : null
+		};
+
+		beacon.quest = {
+			startDuration : 0,
+			playDuration : 0
+		};
+
+		beacon.soundTracks = JSON.parse('{!RadioClips}');
+		beacon.soundTrack = 1;
+
+
+		beacon.playTimer = function(){
+
+			if(beacon.quest.playDuration == 0){
+
+				// Need to do something here to go to credits
+				console.log('BANG -play');
+
+				playTimerExpired();
+
+				clearTimeout(beacon.pTimer);
+			}
+
+			var diffMinutes = Math.floor(beacon.quest.playDuration / 60);
+			var diffSecs = Math.floor(beacon.quest.playDuration - (diffMinutes * 60));
+
+			$('#playTimer').html('You have <h1>' + paddy(diffMinutes, 2) + ':' + paddy(diffSecs, 2) + '</h1> of tape left.');
+
+			beacon.quest.playDuration--;
+		};
+
+		beacon.startTimer = function(){
+
+			if(beacon.quest.startDuration == 0){
+
+				// Need to do something here to go to credits
+				console.log('BANG -start');
+
+				startTimerExpired();
+
+				clearTimeout(beacon.sTimer);
+			}
+
+			var diffMinutes = Math.floor(beacon.quest.startDuration / 60);
+			var diffSecs = Math.floor(beacon.quest.startDuration - (diffMinutes * 60));
+
+			$('#startTimer').html('You have <h1>' + paddy(diffMinutes, 2) + ':' + paddy(diffSecs, 2) + '</h1> before the tape is dequeued.');
+
+			beacon.quest.startDuration--;
+
+		};
+
+		beacon.runEvents = function(){
+			var secsLeft = Math.floor((beacon.finish - Date.now()) / 1000);
+			var curPos = beacon.totalLength - secsLeft;
+
+			if(beacon.updates.lastOtherCheck === null){
+				beacon.updates.lastOtherCheck = curPos;
+			}else{
+
+				 Visualforce.remoting.Manager.invokeAction(
+            		'{!$RemoteAction.BeaconHomeController.runEvents}',
+					beacon.adventureName, 
+					beacon.updates.lastOtherCheck, 
+					curPos, 
+					0, 
+					0, 
+					runEventsResult);
+				beacon.updates.lastOtherCheck = curPos;
+			}
+
+		}
+
+		function paddy(n, p, c) {
+		    var pad_char = typeof c !== 'undefined' ? c : '0';
+		    var pad = new Array(1 + p).join(pad_char);
+		    return (pad + n).slice(-pad.length);
+		};
+
+		function onDialogueEnded(isAllCompleted, channelNo){
+			$('#channelDialogue' + channelNo).off('ended');
+			$('#channelDialogue' + channelNo).attr('src', '');
+
+			if(channelNo < 5 && $('#channelDialogue' + channelNo).data('hasnext') == true){
+				$('#channelDialogue' + (channelNo + 1)).trigger('play');
+				return;
+			}
+
+			if(isAllCompleted){
+				allCompleted();
+			}else{
+				refreshPage();
+				$('#channelSoundTrack').attr('src', beacon.soundTracks[beacon.soundTrack++]);
+				$('#channelSoundTrack').trigger('play');
+				$('div[id$="cassette"]').show();
+				$('#overlay').hide();
+			}
+		};
+
+		function pauseAllChannelsAndPlayDialogue(){
+			$('#channel0').trigger('pause');
+			$('#channelSoundTrack').trigger('pause');
+			setTimeout(playDialogue, 2000);
+		};
+
+		function playDialogue(){
+			$('#channelDialogue0').trigger('play');
+			window.scrollTo(0, 0);
+			$('div[id$="cassette"]').hide();
+			$('#overlay').css('display', 'table');
+		};
+
+		function runEventsResult(result, event){
+
+			if(result.CorrectAnswerAudio.length > 0){
+
+				clearTimeout(beacon.pTimer);
+				clearTimeout(beacon.events);
+
+				$('#channelDialogue0').attr('src', result.CorrectAnswerAudio[0].ResourceUrl);
+				$('#channelDialogue0').attr('volume', result.CorrectAnswerAudio[0].VolumePercentage);
+				$('#channelDialogue0').on('ended', function(){onDialogueEnded(result.AllQuestsAnswered, 0);});
+				$('#channelDialogue0').on('canplay', pauseAllChannelsAndPlayDialogue);
+
+				for(var i=1; i<result.CorrectAnswerAudio.length; i++){
+					$('#channelDialogue' + (i-1)).data('hasnext', true);
+
+					$('#channelDialogue' + i).attr('src', result.CorrectAnswerAudio[i].ResourceUrl);
+					$('#channelDialogue' + i).attr('volume', result.CorrectAnswerAudio[i].VolumePercentage);
+					$('#channelDialogue' + i).on('ended', function(){onDialogueEnded(result.AllQuestsAnswered, i);});
+				}
+
+				for(var i=result.CorrectAnswerAudio.length; i < 5; i++){
+					$('#channelDialogue' + i).data('hasnext', false);
+					$('#channelDialogue' + i).attr('src', '');
+				}
+
+
+
+				if(result.RefreshChatter){
+					chatter.getFeed().showNewUpdates();
+				}
+
+				return;
+			}
+
+			for(var i=0 ; i<result.AudioEvents.length; i++){
+				if(result[i].AudioEvents.ResourceUrl != null){
+					$('#channel' + result[i].AudioEvents.Channel).attr('src', result[i].AudioEvents.ResourceUrl);
+					$('#channel' + result[i].AudioEvents.Channel).trigger('play');
+				}
+				$('#channel' + result[i].AudioEvents.Channel).attr('volume', result[i].AudioEvents.VolumePercentage);
+			}
+
+			if(result.AllQuestsAnswered){
+				allCompleted();
+				return;
+			}
+
+			if(result.RefreshChatter){
+				chatter.getFeed().showNewUpdates();
+				//refreshPage();
+			}
+
+			if(result.CurrentQuestAnswered){
+				refreshPage();
+			}
+
+
+			beacon.events = setTimeout(beacon.runEvents, 2000);
+		};
+
+	</script>
+
+
+	<div id="overlay" style="height:100%; width:100%; z-index:10000; display:none; position:absolute; opacity: 0.8; background-color:white;">
+		<div style="display: table-cell;vertical-align: middle;">
+			<div style="width: 500px; margin-left: auto; margin-right: auto">
+				<apex:image url="{!$Resource.cassette}" width="500" />
+			</div>
+		</div>
+	</div>
+
+	<apex:form id="everything">
+
+		<audio id="channel0"/>
+		<audio id="channelDialogue0" />
+		<audio id="channelDialogue1" />
+		<audio id="channelDialogue2" />
+		<audio id="channelDialogue3" />
+		<audio id="channelDialogue4" />
+		
+		<apex:actionFunction action="{!refresh}" name="refreshPage"  reRender="adventures, inadventure ,endadventure, refreshJs, feed"/>
+		<apex:actionFunction action="{!allCompleted}" name="allCompleted"  reRender="adventures, inadventure ,endadventure, refreshJs, feed"/>
+		<apex:actionFunction action="{!playTimerExpired}" name="playTimerExpired"  reRender="adventures, inadventure ,endadventure, refreshJs, feed"/>
+		<apex:actionFunction action="{!startTimerExpired}" name="startTimerExpired"  reRender="adventures, inadventure ,endadventure, refreshJs, feed"/>
+
+		<apex:outputPanel id="adventures">
+
+			<apex:outputPanel id="p1" rendered="{!pageStatus == 'ADVENTURES'}">
+				<h1>Simulation</h1><br/><br/>
+
+				<apex:dataTable value="{!adventures}" var="adventure" cellpadding="5px">
+					<apex:column value="{!adventure.adventureDetails.Name}" headerValue="adventure Name" />
+					<apex:column value="{!adventure.adventureDetails.Description}" headerValue="Synopsis" />
+
+					<apex:column value="{!adventure.adventureSettings.Completed__c}" headerValue="Completed" />
+					<apex:column value="{!adventure.adventureSettings.Attempts__c}" headerValue="Attempts" />
+
+					<apex:column >
+						<apex:commandLink value="Start" action="{!Startadventure}" rendered="{!ISNULL(InPlayName)}" reRender="adventures, inadventure ,endadventure, refreshJs, feed">
+							<apex:param name="currentadventure" assignTo="{!currentadventureName}" value="{!adventure.adventureSettings.Name}"/>
+						</apex:commandLink>
+						<apex:commandLink value="Continue" action="{!Startadventure}" reRender="adventures, inadventure ,endadventure, refreshJs, feed" rendered="{!InPlayName == adventure.adventureSettings.Name}">
+							<apex:param name="currentadventure" assignTo="{!currentadventureName}" value="{!adventure.adventureSettings.Name}"/>
+						</apex:commandLink>
+					</apex:column>
+					<apex:column >
+						<apex:commandLink value="Reset (for testing)" action="{!reset}" reRender="adventures, inadventure ,endadventure, refreshJs">
+							<apex:param name="currentadventure" assignTo="{!currentadventureName}" value="{!adventure.adventureSettings.Name}"/>
+						</apex:commandLink>
+					</apex:column>
+
+				</apex:dataTable>
+
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel id="inadventure">
+
+			<apex:outputPanel layout="block" id="cassette">
+				<apex:image url="{!$Resource.cassette}" width="500" />
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!pageStatus == 'INADVENTURE'}">
+				<!-- Put the game play stuff in here -->
+
+				<script>
+					beacon.events = setTimeout(beacon.runEvents, 0);
+					beacon.quest.playDuration = {!currentadventure.currentQuest.PlayTime};
+				</script>
+
+	  
+				<apex:outputPanel rendered="{!currentadventure.QuestStarted != true}" id="startPanel">
+
+					<script>
+						$('.feed').hide();
+						beacon.quest.startDuration = {!currentadventure.currentQuest.LoadTime};
+						beacon.sTimer = setInterval(beacon.startTimer, 1000);
+					</script>
+
+
+					<!-- We're loading the tape -->
+					<p>{!currentadventure.currentQuest.LoadingText}</p>
+					<p>It's loaded and in the queue</p>
+					<p id="startTimer"></p>
+
+					<apex:commandLink onclick="clearTimeout(beacon.sTimer);" action="{!startQuest}" value="Start" reRender="adventures, inadventure ,endadventure, refreshJs, feed, thefeed"/>
+
+				</apex:outputPanel>
+
+
+				<apex:outputPanel rendered="{!currentadventure.QuestStarted == true}" id="playPanel">
+
+					<!-- This is the quest side of it -->
+					<p id="playTimer"></p>
+				
+					<script>
+						$('.feed').show();
+						beacon.pTimer = setInterval(beacon.playTimer, 1000);
+					</script>
+
+				</apex:outputPanel>
+
+			</apex:outputPanel>
+
+		</apex:outputPanel>
+
+		<apex:outputPanel id="endadventure">
+
+			<apex:outputPanel rendered="{!pageStatus == 'adventureEND'}">
+				<!-- End of adventure summary etc -->
+				<script>
+					$('.feed').hide();
+					$('div[id$="cassette"]').hide();
+					$('#overlay').hide();
+				</script>
+				<div style="background-color:black; position:absolute; width:100%">
+					<div style="width: 500px; margin-left: auto; margin-right: auto">
+						<table style="color:white; font-size:20px; padding:100px 0px;">
+							<tr>
+								<td colspan="2" style="text-align:center; color:white; padding-top:15px;padding-bottom:10px;">
+									Created by
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white; padding-bottom:50px">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Director
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Producer
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Screenwriter
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Sound Engineer
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Gaffer
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr >
+								<td style="text-align:right; color:white; padding-right:10px">
+									Tea boy
+								</td>
+								<td style="color:white;padding-left:10px;">
+									Will Coleman
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white; padding-top:50px;padding-bottom:10px;">
+									None of the following were ever involved
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Simon Goodyear
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Rob Goodman
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Peter **REDACTED**
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Paul Battisson
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Clive Howard
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Alex Tennant
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Simon James
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Nanna Gunnars
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Doug Merrett
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Mark Quirk
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align:center; color:white;">
+									Neil Cargill
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+			</apex:outputPanel>
+
+		</apex:outputPanel>
+
+		<apex:outputPanel id="refreshJs">
+			<script>
+				var beacon = beacon || {};
+				beacon.adventureName = '{!currentadventureName}';
+
+			</script>
+		</apex:outputPanel>
+
+	</apex:form>
+
+	<div class="feed" style="display:none;">
+		<chatter:feed entityId="{!ChatterTarget}" id="thefeed" showPublisher="false" />
+	</div>
+
+
+
+</apex:page>
